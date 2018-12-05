@@ -89,6 +89,15 @@ public class Statistics extends Observation implements DateTimeComparable {
 	}
 
 	/**
+	 * Get the statsType of the observation to the user
+	 * 
+	 * @return The statsType of the object
+	 */
+	public StatsType getStatType() {
+		return this.statType;
+	}
+
+	/**
 	 * Method to create a time from a dateString
 	 * 
 	 * @param dateTimeStr
@@ -233,8 +242,8 @@ public class Statistics extends Observation implements DateTimeComparable {
 	}
 
 	/**
-	 * Method will return true or false depending on whether a date is the same
-	 * as another ZDT date
+	 * Method will return true or false depending on whether a date is the same as
+	 * another ZDT date
 	 * 
 	 * @return boolean that is true if the ZDT is the same as the one at hand
 	 */

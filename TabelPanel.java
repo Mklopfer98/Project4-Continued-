@@ -67,4 +67,10 @@ public class TabelPanel extends JPanel {
 		}
 
 	}
+
+	public void newDataRow(String stid, String p, String string, double value, int numberOfReportingStations,
+			String utcDateTimeString) {
+		// TODO Auto-generated method stub
+		
+	}
 }

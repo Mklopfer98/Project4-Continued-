@@ -1,5 +1,4 @@
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,20 +25,26 @@ public class MesonetFrame extends JFrame {
 
 	/** Panel to hold the Parameters and the Statistics choices **/
 	JPanel paramStat = new JPanel();
-	
+
 	/** File that the user wishes to open **/
 	private static File file = null;
-	
+
 	/** Parameter Panel **/
 	ParameterPanel param = new ParameterPanel();
-	
+
 	/** Statistics Panel **/
 	StatisticsPanel stats = new StatisticsPanel();
-	
+
 	/** Table Panel **/
 	TabelPanel table = new TabelPanel();
-		
-	public MesonetFrame(String title) {
+
+	/** Bottom Panel **/
+	BottomPanel buttons = new BottomPanel();
+
+	/** File Menu Bar **/
+	FileMenuBar menu = new FileMenuBar("File");
+
+	public MesonetFrame(String title) throws IOException {
 		super(title);
 
 		/**
@@ -52,14 +57,14 @@ public class MesonetFrame extends JFrame {
 
 		/** Add the panels to the frame from the other class **/
 		add(table, BorderLayout.CENTER);
-		add(new BottomPanel(), BorderLayout.SOUTH);
-		add(new FileMenuBar("File"), BorderLayout.NORTH);
+		add(buttons, BorderLayout.SOUTH);
+		add(menu, BorderLayout.NORTH);
+		buttons.setTable(table);
 
 		// Configure the frame
 
 		setSize(900, 700);
 		setVisible(true);
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
@@ -81,6 +86,8 @@ public class MesonetFrame extends JFrame {
 		JMenu file = new JMenu("File");
 		JMenuItem getFile = new JMenuItem("Open Data File");
 		JMenuItem exit = new JMenuItem("Exit");
+		
+		/** Add the action listeners to the components **/
 
 		/** JPanel to hold the slogan of our program **/
 		JPanel slogan = new JPanel();
@@ -106,6 +113,10 @@ public class MesonetFrame extends JFrame {
 			// Add menu components to the menu bar
 			file.add(getFile);
 			file.add(exit);
+			
+			/** Add the action listener to the file bar **/
+			exit.addActionListener(this);
+			getFile.addActionListener(this);
 
 			add(file); // Add the component list to the menu, and the slogan bar
 			add(slogan);
@@ -113,26 +124,26 @@ public class MesonetFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			
-			JMenuItem action = (JMenuItem)event.getSource();
-			
+
+			JMenuItem action = (JMenuItem) event.getSource();
+
 			if (action == exit) {
 				System.exit(0);
 			}
-			
+
 			else if (action == getFile) {
-				
+
 				JFileChooser choice = new JFileChooser("data");
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("mdf");
-				
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("mdf", "mdf file");
+
 				choice.setFileFilter(filter);
-				
+
 				choice.showOpenDialog(this);
-				
-				try {
-					fileChoice
-					
-				} catch (IOException e) {
+
+				try { // Throw an exception if the file fails to open
+					fileChoice(choice.getSelectedFile());
+
+				} catch (IOException e) { // Catch a failed file to open
 					System.out.println(e.getMessage());
 					System.exit(0);
 				}
@@ -160,11 +171,12 @@ public class MesonetFrame extends JFrame {
 
 		/** Panel to hold the buttons **/
 		private JPanel buttonPane = new JPanel();
-		
+
 		/** Data object with the data **/
 		private MapData data;
-		
+
 		/** Table for the data **/
+		@SuppressWarnings("unused")
 		private TabelPanel tabel;
 
 		public BottomPanel() {
@@ -175,6 +187,10 @@ public class MesonetFrame extends JFrame {
 			/** Set the text of the buttons to timesRoman **/
 			calc.setFont(timesRoman);
 			exit.setFont(timesRoman);
+			
+			/** Add the action listener to the buttons **/
+			calc.addActionListener(this);
+			exit.addActionListener(this);
 
 			/** Add the buttons to the bottom panel **/
 			buttonPane.add(calc);
@@ -182,44 +198,51 @@ public class MesonetFrame extends JFrame {
 			add(buttonPane);
 			pack();
 		}
-		
+
 		public void setTable(TabelPanel tabel) {
 			this.tabel = tabel;
 		}
-		
+
 		public void setData(MapData data) {
 			this.data = data;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			JButton choice = (JButton)e.getSource();
-			
+
+			JButton choice = (JButton) e.getSource();
+
 			if (choice == exit) {
 				System.exit(0);
 			}
-			
+
 			else if (choice == calc) {
-				
+
 				/** Get the desired options from the user **/
 				StatsType stat = stats.isSelected();
 				ArrayList<String> paramID = param.isSelected();
-				
+
 				/** Get the desired data **/
 				if (!paramID.isEmpty()) {
-					for (String p: paramID) {
+					for (String p : paramID) {
 						Statistics statCurrent = data.getStatistics(stat, p);
+						table.newDataRow(statCurrent.getStid(), p, statCurrent.getStatType().toString(),
+								statCurrent.getValue(), statCurrent.getNumberOfReportingStations(),
+								statCurrent.getUTCDateTimeString());
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No Arguments were chosen", "Please select valid parameters",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-			
+
 		}
 	}
-	
+
 	public void fileChoice(File chosenFile) throws IOException {
 		file = chosenFile;
 		MapData userData = new MapData(file);
-		
-	//}
+		buttons.setData(userData);
+
+	}
 }
