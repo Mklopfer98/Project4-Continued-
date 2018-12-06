@@ -1,6 +1,6 @@
 
 /** @author Rafal & Matthew Klopfer
- *  @version 10/28/2018
+ *  @version 12/5/2018
  *  Lab 11
  * 
  *  This is the Driver file for Project2, the file is the main for the program that will use
@@ -9,8 +9,6 @@
  *  to make sure that they are older, same or newer than other date files
  */
 import java.io.IOException;
-
-import javax.swing.SwingUtilities;
 
 /**
  * This is the main Class for the program all the things needed to run the
@@ -25,16 +23,8 @@ public class Driver {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		// Initialize the GUI and run it
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new MesonetFrame("Mesonet Data Calculator");
-				} catch (IOException e) {
+		// Initialize the GUI and run it, this is all we should have to do!!
+		new MesonetFrame("Mesonet Data Calculator");
 
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }

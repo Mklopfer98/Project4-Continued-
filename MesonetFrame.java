@@ -1,4 +1,10 @@
 
+/** @author Matthew Klopfer
+ *  @version 12/5/2018
+ *  Lab 11
+ * 
+ * This is the Frame file that will add all of the components of the frame into one class to then be given to the user
+ */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +16,13 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * This class contains some sub classes and all of the necessary implementations
+ * to create a spectacular looking GUI
+ * 
+ * @author Matthew Klopfer
+ *
+ */
 public class MesonetFrame extends JFrame {
 
 	public static final long serialVersionUID = 1L;
@@ -44,25 +57,30 @@ public class MesonetFrame extends JFrame {
 	/** File Menu Bar **/
 	FileMenuBar menu = new FileMenuBar("File");
 
+	/**
+	 * Constructor for the frame that will be given to the user
+	 * 
+	 * @param title
+	 *            the title of the frame
+	 * @throws IOException
+	 *             an exception that could occur
+	 */
 	public MesonetFrame(String title) throws IOException {
 		super(title);
 
-		/**
-		 * Add the panel that contains the parameter and statistics options list
-		 **/
+		/* Add the panel that contains the parameter and statistics options list */
 		paramStat.setLayout(new GridLayout(0, 2));
 		paramStat.add(param);
 		paramStat.add(stats);
 		add(paramStat, BorderLayout.WEST);
 
-		/** Add the panels to the frame from the other class **/
+		/* Add the panels to the frame from the other class */
 		add(table, BorderLayout.CENTER);
 		add(buttons, BorderLayout.SOUTH);
 		add(menu, BorderLayout.NORTH);
 		buttons.setTable(table);
 
-		// Configure the frame
-
+		/* Set the size of the frame and make the close operation */
 		setSize(1300, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,40 +100,44 @@ public class MesonetFrame extends JFrame {
 
 		private static final long serialVersionUID = 1L;
 
-		/** Create the menu bar **/
+		/* Create the menu bar */
 		JMenuBar menu = new JMenuBar();
 		JMenu fileBar = new JMenu("File");
 		JMenuItem getFile = new JMenuItem("Open Data File");
 		JMenuItem exit = new JMenuItem("Exit");
 
-		/** JPanel to hold the slogan of our program **/
+		/* JPanel to hold the slogan of our program */
 		JPanel slogan = new JPanel();
 
-		/** Slogan of the program **/
+		/* Slogan of the program */
 		JLabel meso = new JLabel("Mesonet - We don't set records, we report them!");
 
+		/**
+		 * The bar that will hold the file button to open up the file chooser
+		 * 
+		 * @param title
+		 *            the title of the file menu bar
+		 */
 		public FileMenuBar(String title) {
 
+			/* Set the color and layout */
 			setBackground(Color.WHITE);
 			setLayout(new GridLayout(2, 0));
 
-			/** Set up the menu **/
-			// Change font of all menu components
+			/* Change font of all menu components */
 			getFile.setFont(timesRoman);
 			exit.setFont(timesRoman);
 			menu.setFont(timesRoman);
 			meso.setFont(timesRoman);
 			fileBar.setFont(timesRoman);
 
-			// Add the slogan to the JPanel
-			slogan.add(meso);
+			slogan.add(meso); // Add the slogan to the JPanel
 			slogan.setBackground(Color.GRAY); // Set the color of the slogan label
 
-			// Add menu components to the menu bar
-			add(menu, BorderLayout.EAST);
+			add(menu, BorderLayout.EAST); // Add menu components to the menu bar
 			menu.add(fileBar);
 
-			/** Add the action listener to the file bar **/
+			/* Add the action listener to the file bar's componets */
 			exit.addActionListener(this);
 			getFile.addActionListener(this);
 
@@ -124,23 +146,29 @@ public class MesonetFrame extends JFrame {
 			add(slogan);
 		}
 
+		/**
+		 * Method will react to when a button in the file menu bar is pressed
+		 * 
+		 * @param ActionEvent
+		 *            the even that is occurring in the GUI
+		 */
 		@Override
 		public void actionPerformed(ActionEvent event) {
 
-			JMenuItem action = (JMenuItem) event.getSource();
+			JMenuItem action = (JMenuItem) event.getSource(); // Get the action from the GUI
 
-			if (action == exit) {
+			if (action == exit) { // If the user presses Exit
 				System.exit(0);
 			}
 
-			else if (action == getFile) {
+			else if (action == getFile) { // If the user gets the File
 
 				JFileChooser choice = new JFileChooser("data");
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("mdf file", ".mdf", "All files");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF files", "mdf", "All files");
 
-				choice.setFileFilter(filter);
+				choice.setFileFilter(filter); // Filter the contents for the correct file
 
-				choice.showOpenDialog(this);
+				choice.showOpenDialog(this); // Open the file
 
 				try { // Throw an exception if the file fails to open
 					fileChoice(choice.getSelectedFile());
@@ -148,6 +176,8 @@ public class MesonetFrame extends JFrame {
 				} catch (IOException e) { // Catch a failed file to open
 					System.out.println(e.getMessage());
 					System.exit(0);
+				} catch (NullPointerException e) {
+					// If they exit from the file chooser
 				}
 			}
 		}
@@ -181,69 +211,99 @@ public class MesonetFrame extends JFrame {
 		@SuppressWarnings("unused")
 		private TabelPanel tabel;
 
+		/**
+		 * The bottom panel on the GUI to hold the 2 buttons for the user
+		 * 
+		 */
 		public BottomPanel() {
 
-			/** Set the layout of the bottom panel **/
+			/* Set the layout of the bottom panel */
 			setLayout(new GridLayout(1, 1));
 
-			/** Set the text of the buttons to timesRoman **/
+			/* Set the text of the buttons to timesRoman */
 			calc.setFont(timesRoman);
 			exit.setFont(timesRoman);
 
-			/** Add the action listener to the buttons **/
+			/* Add the action listener to the buttons */
 			calc.addActionListener(this);
 			exit.addActionListener(this);
 
-			/** Add the buttons to the bottom panel **/
+			/* Add the buttons to the bottom panel */
 			buttonPane.add(calc);
 			buttonPane.add(exit);
 			add(buttonPane);
-			pack();
+			pack(); // Pack the panel to make it look nicer
 		}
 
+		/**
+		 * Method will set the table that is currently being used
+		 * 
+		 * @param tabel
+		 *            the table that is in the GUI
+		 */
 		public void setTable(TabelPanel tabel) {
 			this.tabel = tabel;
 		}
 
+		/**
+		 * Method will give the GUI the data that it is to pull from
+		 * 
+		 * @param data
+		 *            the data that was calculated from the MapData class
+		 */
 		public void setData(MapData data) {
 			this.data = data;
 		}
 
+		/**
+		 * Will wait for an event to occur in the bottom panel and react when it does
+		 * 
+		 * @param ActionEvent
+		 *            the event we are waiting to see
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			JButton choice = (JButton) e.getSource();
+			JButton choice = (JButton) e.getSource(); // Get the choice from the panel
 
-			if (choice == exit) {
+			if (choice == exit) { // Exit if the exit button is pressed
 				System.exit(0);
 			}
 
-			else if (choice == calc) {
+			else if (choice == calc) { // Calculate out the statistics if the calc button is pressed
 
-				/** Clear the table **/
+				/* Clear the table */
 				table.clearTable();
 
-				/** Get the desired options from the user **/
+				/* Get the desired options from the user */
 				StatsType stat = stats.isSelected();
 				ArrayList<String> paramID = param.isSelected();
 
-				/** Get the desired data **/
+				/* Get the desired data */
 				if (!paramID.isEmpty()) {
-					for (String p : paramID) {
+					for (String p : paramID) { // For each parameter chosen set the cell values
 						Statistics statCurrent = data.getStatistics(stat, p);
 						table.newDataRow(statCurrent.getStid(), p, statCurrent.getStatType().toString(),
 								statCurrent.getValue(), statCurrent.getNumberOfReportingStations(),
 								statCurrent.getUTCDateTimeString());
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "No Arguments were chosen", "Please select valid parameters",
-							JOptionPane.INFORMATION_MESSAGE);
+				} else { // If there is not parameters chosen then tell the user to do so
+					JOptionPane.showMessageDialog(null, "No Arguments were chosen", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
 
 		}
 	}
 
+	/**
+	 * Method will give the file to MapData class to get the statistics
+	 * 
+	 * @param chosenFile
+	 *            the user chosen file
+	 * @throws IOException
+	 *             the exception that is thrown if the file fails to open
+	 */
 	public void fileChoice(File chosenFile) throws IOException {
 		file = chosenFile;
 		MapData userData = new MapData(file);

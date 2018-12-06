@@ -1,10 +1,6 @@
 
 /** @author Matthew Klopfer
- *  @author Connor Smith (Collaborated)
- *  @author Alexi Musick (Collaborated)
- *  @author Reece Reinke (Collaborated)
- *  @author Punit Bhakta (Collaborated)
- *  @version 10/28/2018
+ *  @version 12/5/18
  *  Lab 11
  * 
  *  MapData is a class that reads off of a mdf file given to it by the data in the Driver class,

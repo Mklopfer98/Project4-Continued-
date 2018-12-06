@@ -36,7 +36,7 @@ public class Observation {
 	 * @return double
 	 */
 	public double getValue() {
-		return value;
+		return Double.parseDouble(String.format("%.3f", value));
 	}
 
 	/**
