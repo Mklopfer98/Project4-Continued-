@@ -1,0 +1,48 @@
+{
+    "Lab Section": integer - Lab section # 11,
+    "Last Modified": string - 2018-10-28,
+    "OU ID": integer - 113321799,
+    "OU EMAIL": string - matthew.j.klopfer-1@ou.edu,
+    "Tasks": [
+        {
+            "Description": "Create the JPanel for the parameters and make sure it looks correct",
+            "Estimated Time (Minutes)": 1:00,
+            "Actual Time (Minutes)": <1:25>
+        },
+        {
+            "Description": "Create the JPanel for the statistics and make sure it looks correct",
+            "Estimated Time (Minutes)": 1:00,
+            "Actual Time (Minutes)": <1:05>
+        },
+        {
+            "Description": "Create the file menu bar as a class within the MesonetFrame class",
+            "Estimated Time (Minutes)": 35,
+            "Actual Time (Minutes)": <41>
+        },
+        {
+            "Description": "Create MesonetFrame as the main GUI aplicator for the other panels, this is the JFrame",
+            "Estimated Time (Minutes)": 2:00,
+            "Actual Time (Minutes)": <2:15>
+        },
+        {
+            "Description": "Make sure that the GUI looks proporly without any funtionality added to it",
+            "Estimated Time (Minutes)": 45,
+            "Actual Time (Minutes)": <1:10>
+        },
+        {
+            "Description": "Color the GUI and add the buttons for calculate and exit at the bottom",
+            "Estimated Time (Minutes)": 40,
+            "Actual Time (Minutes)": <29>
+        },
+        {
+            "Description": "Finish writing this TODO file and constantly adding functionality to the GUI",
+            "Estimated Time (Minutes)": 2:35,
+            "Actual Time (Minutes)": <4:15>
+        },
+        {
+            "Description": "Add action listeners to the components",
+            "Estimated Time (Minutes)": 2:35,
+            "Actual Time (Minutes)": <2:40>
+        },
+    ]
+}
