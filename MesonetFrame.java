@@ -63,7 +63,7 @@ public class MesonetFrame extends JFrame {
 
 		// Configure the frame
 
-		setSize(900, 700);
+		setSize(1300, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -105,6 +105,7 @@ public class MesonetFrame extends JFrame {
 			exit.setFont(timesRoman);
 			menu.setFont(timesRoman);
 			meso.setFont(timesRoman);
+			fileBar.setFont(timesRoman);
 
 			// Add the slogan to the JPanel
 			slogan.add(meso);
@@ -218,6 +219,9 @@ public class MesonetFrame extends JFrame {
 			}
 
 			else if (choice == calc) {
+
+				/** Clear the table **/
+				table.clearTable();
 
 				/** Get the desired options from the user **/
 				StatsType stat = stats.isSelected();

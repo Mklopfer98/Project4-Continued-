@@ -8,7 +8,7 @@ public class StatisticsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/** JRadioButton for minimum calculations **/
-	private JRadioButton min = new JRadioButton("MINIMUN");
+	private JRadioButton min = new JRadioButton("MINIMUM");
 
 	/** JRadioButton for average calculations **/
 	private JRadioButton ave = new JRadioButton("AVERAGE");
