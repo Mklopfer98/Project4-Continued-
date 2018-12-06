@@ -83,11 +83,10 @@ public class MesonetFrame extends JFrame {
 		private static final long serialVersionUID = 1L;
 
 		/** Create the menu bar **/
-		JMenu file = new JMenu("File");
+		JMenuBar menu = new JMenuBar();
+		JMenu fileBar = new JMenu("File");
 		JMenuItem getFile = new JMenuItem("Open Data File");
 		JMenuItem exit = new JMenuItem("Exit");
-		
-		/** Add the action listeners to the components **/
 
 		/** JPanel to hold the slogan of our program **/
 		JPanel slogan = new JPanel();
@@ -97,13 +96,14 @@ public class MesonetFrame extends JFrame {
 
 		public FileMenuBar(String title) {
 
+			setBackground(Color.WHITE);
 			setLayout(new GridLayout(2, 0));
 
 			/** Set up the menu **/
 			// Change font of all menu components
 			getFile.setFont(timesRoman);
 			exit.setFont(timesRoman);
-			file.setFont(timesRoman);
+			menu.setFont(timesRoman);
 			meso.setFont(timesRoman);
 
 			// Add the slogan to the JPanel
@@ -111,14 +111,15 @@ public class MesonetFrame extends JFrame {
 			slogan.setBackground(Color.GRAY); // Set the color of the slogan label
 
 			// Add menu components to the menu bar
-			file.add(getFile);
-			file.add(exit);
-			
+			add(menu, BorderLayout.EAST);
+			menu.add(fileBar);
+
 			/** Add the action listener to the file bar **/
 			exit.addActionListener(this);
 			getFile.addActionListener(this);
 
-			add(file); // Add the component list to the menu, and the slogan bar
+			fileBar.add(getFile); // Add the component list to the menu, and the slogan bar
+			fileBar.add(exit);
 			add(slogan);
 		}
 
@@ -134,7 +135,7 @@ public class MesonetFrame extends JFrame {
 			else if (action == getFile) {
 
 				JFileChooser choice = new JFileChooser("data");
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("mdf", "mdf file");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("mdf file", ".mdf", "All files");
 
 				choice.setFileFilter(filter);
 
@@ -187,7 +188,7 @@ public class MesonetFrame extends JFrame {
 			/** Set the text of the buttons to timesRoman **/
 			calc.setFont(timesRoman);
 			exit.setFont(timesRoman);
-			
+
 			/** Add the action listener to the buttons **/
 			calc.addActionListener(this);
 			exit.addActionListener(this);

@@ -86,9 +86,9 @@ public class MapData {
 	 */
 	public MapData(File file) throws IOException {
 
-		this.fileName = file.getName();
 		this.directory = file.getParentFile().getPath(); // Get the path to the file
-
+		this.fileName = file.getName();
+		
 		int year = Integer.parseInt(fileName.substring(0, 4));
 		int month = Integer.parseInt(fileName.substring(4, 6));
 		int day = Integer.parseInt(fileName.substring(6, 8));
@@ -154,7 +154,7 @@ public class MapData {
 	 */
 	public void parseFile() throws IOException {
 		// Create a fileReader and take its output
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		BufferedReader br = new BufferedReader(new FileReader(directory + "/" + fileName));
 
 		// Throw out the first two lines
 		br.readLine();

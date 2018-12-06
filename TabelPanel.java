@@ -13,6 +13,9 @@ public class TabelPanel extends JPanel {
 
 	/** Create scroll pane **/
 	private JScrollPane scroll = new JScrollPane(table);
+	
+	/** Number of rows in the table **/
+	private int rows = 0;
 
 	public TabelPanel() {
 
@@ -68,9 +71,16 @@ public class TabelPanel extends JPanel {
 
 	}
 
-	public void newDataRow(String stid, String p, String string, double value, int numberOfReportingStations,
+	public void newDataRow(String stid, String stat, String param, double value, int stations,
 			String utcDateTimeString) {
-		// TODO Auto-generated method stub
+		
+		table.setValueAt(stid, rows, 0);
+		table.setValueAt(stat, rows, 1);
+		table.setValueAt(param, rows, 2);
+		table.setValueAt(value, rows, 3);
+		table.setValueAt(stations, rows, 4);
+		table.setValueAt(utcDateTimeString, rows, 5);
+		++ rows; // Increment the number of rows
 		
 	}
 }

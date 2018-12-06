@@ -25,32 +25,16 @@ public class Driver {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		// Initialize the GUI
+		// Initialize the GUI and run it
 		SwingUtilities.invokeLater(new Runnable() {
-            public void run()
-            {
-                try
-                {
-                    new MesonetFrame("Mesonet Data Calculator");
-                } catch (IOException e)
-                {
-                   
-                    e.printStackTrace();
-                }
-            }
-        });
-		
-		//final int YEAR = 2018;// Year of the data
-		//final int MONTH = 8;// Month of the data
-		//final int DAY = 30;// Day of the data
-		//final int HOUR = 17;// Hour of the data
-		//final int MINUTE = 45;// Minute of the data
+			public void run() {
+				try {
+					new MesonetFrame("Mesonet Data Calculator");
+				} catch (IOException e) {
 
-		//final String directory = "data";// The file that holds the mdf files to be read
-
-		//MapData mapData = new MapData(YEAR, MONTH, DAY, HOUR, MINUTE, directory);
-
-		//mapData.parseFile();// Parse the file read
-		//System.out.println(mapData.toString());// Print out the statistics calculated
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
